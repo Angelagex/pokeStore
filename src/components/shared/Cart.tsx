@@ -1,0 +1,80 @@
+import React, { useState } from "react";
+import { Button, Offcanvas } from "react-bootstrap";
+import { FaShoppingCart, FaUndo } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import {
+  allinCart,
+  IPokemonInStore,
+} from "../../redux/features/cart/cartSlice";
+import { useAppDispatch } from "../../redux/store";
+import Buy from "../pokemon/Buy";
+import CartItem from "./CartItem";
+
+type Props = {};
+
+const Cart = (props: Props) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  function handleShow() {
+    setShow(true);
+  }
+  const cartPokemons = useSelector(allinCart());
+  const totalPrice = cartPokemons.reduce(
+    (accumulator, currentValue) => accumulator + (currentValue.price * currentValue.amount), 0)
+  const dispatch = useAppDispatch();
+
+  return (
+    <>
+      <div
+        style={{ marginLeft: "40px", fontSize: "40px", color: "#ffd000" }}
+        onClick={handleShow}
+      >
+        <FaShoppingCart />
+      </div>
+
+      <Offcanvas
+        style={{ backgroundColor: "none" }}
+        show={show}
+        onHide={handleClose}
+        placement="end"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>PokeCart</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div
+            style={{
+              background: "#3a37322d",
+              width: "367px",
+              height: "700px",
+              borderRadius: "6px",
+              padding: "10px"
+            }}
+          >
+            {cartPokemons.map((item: IPokemonInStore, idx: number) => (
+              <div key={idx}>
+                <CartItem pokemon={item} />
+              </div>
+            ))}
+          </div>
+          <div>Total: {totalPrice} dabloons</div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              marginTop: "20px",
+            }}
+          >
+            <Buy />
+            <Button variant="danger">
+              {"Reset Cart" + "   "}
+              <FaUndo />
+            </Button>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
+  );
+};
+
+export default Cart;

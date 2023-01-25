@@ -1,0 +1,401 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Sacramento&display=swap");
+
+$cursive: "Great Vibes", cursive;
+$handwriting: "Sacramento", cursive;
+
+$white: #fff;
+$black: #000;
+
+:root {
+  --color1: rgb(0, 231, 255);
+  --color2: rgb(255, 0, 231);
+  --eevee1: #efb2fb;
+  --eevee2: #acc6f8;
+}
+
+.card:before,
+.card:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: color-dodge;
+  transition: all 0.33s ease;
+}
+
+.divCard {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 5vmin;
+}
+
+.card {
+  --color1: #ec9bb6;
+  --color2: #ccac6f;
+  --color3: #69e4a5;
+  --color4: #8ec5d6;
+  --color5: #b98cce;
+
+  --grad_pos: none;
+  --sprk_pos: none;
+  --opc: none;
+
+  margin: 20px;
+  padding: 2em;
+  border: 1px solid transparentize($white, 0.5);
+  text-shadow: 0 0 1em transparentize($black, 0.5);
+  background: transparentize($white, 0.8);
+  backdrop-filter: blur(20px);
+  transform: perspective(500px);
+  color: #fff;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+  border-radius: 5% / 3.5%;
+  box-shadow: -5px -5px 5px -5px var(--color1), 5px 5px 5px -5px var(--color2),
+    -7px -7px 10px -5px transparent, 7px 7px 10px -5px transparent,
+    0 0 5px 0px rgba(255, 255, 255, 0), 0 55px 35px -20px rgba(0, 0, 0, 0.5);
+
+  transition: transform 0.5s ease, box-shadow 0.2s ease;
+  will-change: transform, filter;
+
+//   &:hover:before {
+//     background-position: attr(before-style)
+//   } /* gradient */
+//   &:hover:after {
+//     background-position:attr(after-style);
+    
+//   } /* sparkles */
+}
+
+.card:hover .content {
+  transform: translateZ(12px);
+
+}
+
+.card::before {
+  background-position: 50% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    115deg,
+    transparent 0%,
+    var(--color1) 25%,
+    transparent 47%,
+    transparent 53%,
+    var(--color2) 75%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  filter: brightness(0.5) contrast(1);
+  z-index: 1;
+  border-radius: 14px;
+}
+
+.card::after {
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif"),
+    url(https://assets.codepen.io/13471/holo.png),
+    linear-gradient(
+      
+      125deg,
+      #ff008450 15%,
+      #fca40040 30%,
+      #ffff0030 40%,
+      #00ff8a20 60%,
+      #00cfff40 70%,
+      #cc4cfa50 85%
+    );
+  background-position: 50% 50%;
+  background-size: 250%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  transition: all 0.33s ease;
+  mix-blend-mode: color-dodge;
+  opacity: 0.75;
+  border-radius: 14px;
+}
+
+.content {
+  transform-style: preserve-3d;
+  text-align: center;
+
+  h2 {
+    color: #fff;
+    transform: translateZ(100px);
+  }
+  p {
+    color: #fff;
+    transform: translateZ(50px);
+  }
+}
+
+.cardContainer {
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding: 20px 50px;
+  justify-content: center;
+  height: 100vh;
+  overflow: auto;
+  overflow-wrap: normal;
+  overflow: -moz-scrollbars-none; 
+  -ms-overflow-style: none; 
+}
+
+.cardContainer::-webkit-scrollbar{
+  width: 0! important
+}
+
+.cardImg {
+  max-width: 300px;
+}
+
+.mainContainer {
+  background-blend-mode: difference;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(https://i.ibb.co/T28DcRD/thimo-pedersen-dip9-IIw-UK6w-unsplash.jpg);
+}
+
+//-------------------------------------
+
+.card.active:after,
+.card:hover:after {
+  filter: brightness(1) contrast(1);
+  opacity: 1;
+}
+
+.card.active,
+.card:hover {
+  animation: none;
+  transition: box-shadow 0.1s ease-out;
+}
+
+.card.active:before,
+.card:hover:before {
+  animation: none;
+  background-image: linear-gradient(
+    110deg,
+    transparent 25%,
+    var(--color1) 48%,
+    var(--color2) 52%,
+    transparent 75%
+  );
+  background-position: 50% 50%;
+  background-size: 250% 250%;
+  opacity: 0.88;
+  filter: brightness(0.66) contrast(1.33);
+  transition: none;
+}
+
+.card.active:before,
+.card:hover:before,
+.card.active:after,
+.card:hover:after {
+  animation: none;
+  transition: none;
+  
+}
+
+.card.animated {
+  transition: none;
+  animation: holoCard 12s ease 0s 1;
+  &:before {
+    transition: none;
+    animation: holoGradient 12s ease 0s 1;
+  }
+  &:after {
+    transition: none;
+    animation: holoSparkle 12s ease 0s 1;
+  }
+  border-radius: 14px;
+}
+
+@keyframes holoSparkle {
+  0%,
+  100% {
+    opacity: 0.75;
+    background-position: 50% 50%;
+    filter: brightness(1.2) contrast(1.25);
+  }
+  5%,
+  8% {
+    opacity: 1;
+    background-position: 40% 40%;
+    filter: brightness(0.8) contrast(1.2);
+  }
+  13%,
+  16% {
+    opacity: 0.5;
+    background-position: 50% 50%;
+    filter: brightness(1.2) contrast(0.8);
+  }
+  35%,
+  38% {
+    opacity: 1;
+    background-position: 60% 60%;
+    filter: brightness(1) contrast(1);
+  }
+  55% {
+    opacity: 0.33;
+    background-position: 45% 45%;
+    filter: brightness(1.2) contrast(1.25);
+  }
+}
+
+@keyframes holoGradient {
+  0%,
+  100% {
+    opacity: 0.5;
+    background-position: 50% 50%;
+    filter: brightness(0.5) contrast(1);
+  }
+  5%,
+  9% {
+    background-position: 100% 100%;
+    opacity: 1;
+    filter: brightness(0.75) contrast(1.25);
+  }
+  13%,
+  17% {
+    background-position: 0% 0%;
+    opacity: 0.88;
+  }
+  35%,
+  39% {
+    background-position: 100% 100%;
+    opacity: 1;
+    filter: brightness(0.5) contrast(1);
+  }
+  55% {
+    background-position: 0% 0%;
+    opacity: 1;
+    filter: brightness(0.75) contrast(1.25);
+  }
+}
+
+@keyframes holoCard {
+  0%,
+  100% {
+    transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+  }
+  5%,
+  8% {
+    transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+  }
+  13%,
+  16% {
+    transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+  }
+  35%,
+  38% {
+    transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+  }
+  55% {
+    transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+  }
+}
+
+.card.eevee:hover {
+  box-shadow: 0 0 30px -5px white, 0 0 10px -2px white,
+    0 55px 35px -20px rgba(0, 0, 0, 0.5);
+}
+.card.eevee:hover:before,
+.card.eevee.active:before {
+  background-image: linear-gradient(
+    115deg,
+    transparent 20%,
+    var(--color1) 36%,
+    var(--color2) 43%,
+    var(--color3) 50%,
+    var(--color4) 57%,
+    var(--color5) 64%,
+    transparent 80%
+  );
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  perspective: 2000px;
+  position: relative;
+  z-index: 1;
+  transform: translate3d(0.1px, 0.1px, 0.1px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: center;
+  padding-left: 4px;
+  align-items: center;
+}
+
+.stats {
+  margin-top: 2rem;
+  font-size: x-large;
+}
+
+.icons {
+  font-size: 300px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .navTitle {
+    font-size: 50px;
+  }
+  .navData {
+    font-size: 18px;
+  }
+  .cardImg {
+    max-width: 200px;
+  }
+
+  .icons {
+    font-size: 150px;
+  }
+  .cardContainer {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  
+  .navTitle {
+    font-size: 25px;
+  }
+  .navData {
+    font-size: 10px;
+  }
+  .cardImg {
+    max-width: 100px;
+  }
+
+  .icons {
+    font-size: 150px;
+  }
+  .cardContainer {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cardHeader h2 {
+    font-size: 15px;
+  }
+  .icons {
+    font-size: 50px;
+  }
+  .cardContainer {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
