@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import {
   allinCart,
   IPokemonInStore,
+  resetCart,
 } from "../../redux/features/cart/cartSlice";
 import { useAppDispatch } from "../../redux/store";
 import Buy from "../pokemon/Buy";
@@ -19,14 +20,17 @@ const Cart = (props: Props) => {
     setShow(true);
   }
   const cartPokemons = useSelector(allinCart());
+  const dispatch = useAppDispatch();
   const totalPrice = cartPokemons.reduce(
     (accumulator, currentValue) => accumulator + (currentValue.price * currentValue.amount), 0)
-  const dispatch = useAppDispatch();
 
+    const handleReset = () => {
+      dispatch(resetCart())
+    }
   return (
     <>
       <div
-        style={{ marginLeft: "40px", fontSize: "40px", color: "#ffd000" }}
+        style={{ marginLeft: "40px", fontSize: "40px", color: "#ffd000", cursor: "pointer" }}
         onClick={handleShow}
       >
         <FaShoppingCart />
@@ -51,7 +55,7 @@ const Cart = (props: Props) => {
               padding: "10px"
             }}
           >
-            {cartPokemons.map((item: IPokemonInStore, idx: number) => (
+            {cartPokemons.length == 0 ? <div className="cartEmpty">Cart is Empty</div> : cartPokemons.map((item: IPokemonInStore, idx: number) => (
               <div key={idx}>
                 <CartItem pokemon={item} />
               </div>
@@ -66,7 +70,7 @@ const Cart = (props: Props) => {
             }}
           >
             <Buy />
-            <Button variant="danger">
+            <Button variant="danger" onClick={handleReset}>
               {"Reset Cart" + "   "}
               <FaUndo />
             </Button>

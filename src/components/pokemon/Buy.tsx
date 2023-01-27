@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import {  resetCart } from "../../redux/features/cart/cartSlice";
+import { useSelector } from "react-redux";
+import {  allinCart, resetCart } from "../../redux/features/cart/cartSlice";
 import { useAppDispatch } from "../../redux/store";
 
 type Props = {};
@@ -9,6 +10,7 @@ type Props = {};
 const Buy: React.FC<Props> = (props) => {
   const [show, setShow] = useState(false);
   const dispatch = useAppDispatch();
+  const cartPokemons = useSelector(allinCart());
 
   const handleClose = () => {
     dispatch(resetCart())
@@ -23,7 +25,7 @@ const Buy: React.FC<Props> = (props) => {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Body>Thanks for your purchase!</Modal.Body>
+        {cartPokemons.length == 0 ? <Modal.Body>Please select some items first!</Modal.Body> : <Modal.Body>Thanks for your purchase!</Modal.Body>}
       </Modal>
     </>
   );

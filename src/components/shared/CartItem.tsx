@@ -15,7 +15,6 @@ interface ICartItemProps {
 }
 
 const CartItem: React.FunctionComponent<ICartItemProps> = ({ pokemon }) => {
-  const cartPokemons = useSelector(allinCart());
   const dispatch = useAppDispatch();
 
   const handleDelete = () => {

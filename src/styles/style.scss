@@ -40,10 +40,7 @@ $black: #000;
   --color3: #69e4a5;
   --color4: #8ec5d6;
   --color5: #b98cce;
-
-  --grad_pos: none;
-  --sprk_pos: none;
-  --opc: none;
+;
 
   margin: 20px;
   padding: 2em;
@@ -60,7 +57,6 @@ $black: #000;
     -7px -7px 10px -5px transparent, 7px 7px 10px -5px transparent,
     0 0 5px 0px rgba(255, 255, 255, 0), 0 55px 35px -20px rgba(0, 0, 0, 0.5);
 
-  transition: transform 0.5s ease, box-shadow 0.2s ease;
   will-change: transform, filter;
 
 //   &:hover:before {
@@ -111,12 +107,12 @@ $black: #000;
     );
   background-position: 50% 50%;
   background-size: 250%;
+  
   background-blend-mode: overlay;
   z-index: 2;
   filter: brightness(1) contrast(1);
   transition: all 0.33s ease;
   mix-blend-mode: color-dodge;
-  opacity: 0.75;
   border-radius: 14px;
 }
 
@@ -141,10 +137,8 @@ $black: #000;
   margin-top: 20px;
   padding: 20px 50px;
   justify-content: center;
-  height: 100vh;
   overflow: auto;
   overflow-wrap: normal;
-  overflow: -moz-scrollbars-none; 
   -ms-overflow-style: none; 
 }
 
@@ -202,6 +196,15 @@ $black: #000;
   animation: none;
   transition: none;
   
+}
+
+.card.eevee {
+  --color1: #ec9bb6;
+  --color2: #ccac6f;
+  --color3: #69e4a5;
+  --color4: #8ec5d6;
+  --color5: #b98cce;
+  --front: var(--eeveefront);
 }
 
 .card.animated {
@@ -381,9 +384,6 @@ $black: #000;
     max-width: 100px;
   }
 
-  .icons {
-    font-size: 150px;
-  }
   .cardContainer {
     margin-left: auto;
     margin-right: auto;
@@ -393,9 +393,5 @@ $black: #000;
   }
   .icons {
     font-size: 50px;
-  }
-  .cardContainer {
-    margin-left: auto;
-    margin-right: auto;
   }
 }

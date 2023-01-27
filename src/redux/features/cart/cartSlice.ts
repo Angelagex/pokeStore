@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { fetchErrorMessage, fetchStatus } from "../../storeData";
 
 export interface IPokemonInStore {
   price: number;

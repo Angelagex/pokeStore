@@ -563,8 +563,7 @@ iframe {
   -webkit-text-stroke-color: rgb(25, 1, 241);
   text-shadow: 
 						8px 8px #ffd000,
-						20px 20px #000000;;
-
+						20px 20px #000000;
   cursor: pointer;
 }
 
@@ -613,4 +612,9 @@ iframe {
     font-size: 20px;
   }
 
+}
+
+.cartEmpty {
+  text-align: center;
+  padding-top: 300px;
 }
