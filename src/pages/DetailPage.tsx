@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { gePokemonPrice } from "../helpers/getPokePrice";
 import { addPokemonToCart, allinCart } from "../redux/features/cart/cartSlice";
 import pokemonSlice, {
   IPokemon,
@@ -39,10 +40,10 @@ const DetailPage: React.FunctionComponent<IDetailPageProps> = (props) => {
   const handleAddToCart = () => {
     dispatch(
       addPokemonToCart({
-        price: pokemon.base_experience,
+        price: gePokemonPrice(pokemon.rarity) as number,
         id: pokemon.id,
         name: pokemon.name,
-        sprite: pokemon.sprite2,
+        sprite: pokemon.animated,
         amount: 1,
       })
     );
@@ -88,7 +89,6 @@ const DetailPage: React.FunctionComponent<IDetailPageProps> = (props) => {
     $card.classList.remove("active");
     $card.classList.remove("animated");
     $card.style.transform = tf;
-    console.log(styleRef.current?.childNodes);
 
     $card!.nextSibling!.textContent = `.card:hover:before { ${grad_pos} }
     .card:hover:after { ${sprk_pos} ${opc} }`;
@@ -132,29 +132,24 @@ const DetailPage: React.FunctionComponent<IDetailPageProps> = (props) => {
           navigate("/main");
         }}
       />
-      <div
-        className="card eevee animated"
-        onPointerMove={(e) => handleHover(e)}
-        onMouseLeave={(e) => resetStyles(e)}
-      >
-        <div className="content">
-          <div className="cardHeader">
-            <h2>{pokemon.name}</h2>{" "}
-          </div>
-          <img className="cardImg" src={pokemon.sprite} alt="" />
-        </div>
-        <h5 className="stats">Price: {pokemon.base_experience} dabloons </h5>
-        <h5 className="stats">Height: {pokemon.height}0 cm</h5>
-        <h5 className="stats">Abilities:</h5>
-        {pokemon.abilities.map((ability: string) => (
-          <h5>-{ability}</h5>
-        ))}
+      <div>
+        <div
+          className="card eevee animated"
+          onPointerMove={(e) => handleHover(e)}
+          onMouseLeave={(e) => resetStyles(e)}
+          style={{ backgroundImage: `url(${pokemon.image})` }}
+        ></div>
+        <style ref={styleRef}></style>
+        <h5 className="stats">
+          Price: {gePokemonPrice(pokemon.rarity)} dabloons{" "}
+        </h5>
+        <h5 className="stats">Hp: {pokemon.hp}</h5>
         <h5 className="stats">Types:</h5>
         {pokemon.types.map((type: string) => (
           <h5>-{type}</h5>
         ))}
       </div>
-      <style ref={styleRef}></style>
+
       <div style={{ display: "flex", flexDirection: "column" }}>
         {pokemon.isFavorite ? (
           <FaStar

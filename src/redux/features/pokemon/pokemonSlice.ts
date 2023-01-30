@@ -5,19 +5,43 @@ import { getAllPokemonsThunk } from "./pokemonActions";
 
 export interface IPokemon {
   abilities: string[];
-  base_experience: number;
-  height: number;
+  rarity: string;
+  hp: string;
   id: number;
   isFavorite: boolean;
   name: string;
-  sprite: string;
-  sprite2: string;
+  image: string;
+  animated: string;
   types: string[];
 }
 
-export interface IFirstPokemon {
+export interface Card {
+  id: string;
   name: string;
-  url: string;
+  supertype: string;
+  subtypes: string[];
+  hp?: string;
+  types?: string[];
+  evolesFrom?: string;
+  evolvesTo?: string[];
+  rules?: string[];
+  ancientTrait?: any;
+  abilities?: any[];
+  attacks?: any[];
+  weaknesses?: any[];
+  resistances?: any[];
+  retreatCost?: string[];
+  convertedRetreatCost?: number;
+  set: any;
+  number: string;
+  artist?: string;
+  rarity: string;
+  flavorText?: string;
+  nationalPokedexNumbers?: number[];
+  legalities: any;
+  images: any;
+  tcgplayer?: any;
+  cardmarket?: any;
 }
 
 interface PokemonState {
@@ -32,13 +56,13 @@ const initialState: PokemonState = {
   allPokemons: [
     {
       abilities: ["ability1", "ability2"],
-      base_experience: 30,
-      height: 4,
+      rarity: "common",
+      hp: "40",
       id: 21,
       isFavorite: false,
       name: "PokeTest",
-      sprite: "None",
-      sprite2: "None",
+      image: "None",
+      animated: "None",
       types: ["grass"],
     },
   ],
@@ -58,6 +82,9 @@ const pokemonSlice = createSlice({
     },
     updateAllPokemons(state: PokemonState, action: PayloadAction<IPokemon>){
         state.allPokemons = [...state.allPokemons.map( (pokemon:IPokemon) => pokemon.id !== action.payload.id ? pokemon : action.payload)]
+    },
+    resetStore(state : PokemonState){
+        state = initialState
     }
   },
   extraReducers: (builder) => {
@@ -84,4 +111,4 @@ export const selectAllPokemons = () => (state: RootState) =>
   state.pokemon.allPokemons;
 export const selectActualPokemon = () => (state: RootState) =>
   state.pokemon.actualPokemon;
-export const { addActualPokemon, updateActualPokemon, updateAllPokemons } = pokemonSlice.actions;
+export const { addActualPokemon, updateActualPokemon, updateAllPokemons, resetStore } = pokemonSlice.actions;

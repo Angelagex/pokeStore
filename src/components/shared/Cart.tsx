@@ -22,15 +22,23 @@ const Cart = (props: Props) => {
   const cartPokemons = useSelector(allinCart());
   const dispatch = useAppDispatch();
   const totalPrice = cartPokemons.reduce(
-    (accumulator, currentValue) => accumulator + (currentValue.price * currentValue.amount), 0)
+    (accumulator, currentValue) =>
+      accumulator + currentValue.price * currentValue.amount,
+    0
+  );
 
-    const handleReset = () => {
-      dispatch(resetCart())
-    }
+  const handleReset = () => {
+    dispatch(resetCart());
+  };
   return (
     <>
       <div
-        style={{ marginLeft: "40px", fontSize: "40px", color: "#ffd000", cursor: "pointer" }}
+        style={{
+          marginLeft: "40px",
+          fontSize: "40px",
+          color: "#ffd000",
+          cursor: "pointer",
+        }}
         onClick={handleShow}
       >
         <FaShoppingCart />
@@ -43,7 +51,9 @@ const Cart = (props: Props) => {
         placement="end"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>PokeCart</Offcanvas.Title>
+          <Offcanvas.Title style={{ color: "#040712" }}>
+            PokeCart
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div
@@ -52,16 +62,20 @@ const Cart = (props: Props) => {
               width: "367px",
               height: "700px",
               borderRadius: "6px",
-              padding: "10px"
+              padding: "10px",
             }}
           >
-            {cartPokemons.length == 0 ? <div className="cartEmpty">Cart is Empty</div> : cartPokemons.map((item: IPokemonInStore, idx: number) => (
-              <div key={idx}>
-                <CartItem pokemon={item} />
-              </div>
-            ))}
+            {cartPokemons.length == 0 ? (
+              <div className="cartEmpty">Cart is Empty</div>
+            ) : (
+              cartPokemons.map((item: IPokemonInStore, idx: number) => (
+                <div key={idx}>
+                  <CartItem pokemon={item} />
+                </div>
+              ))
+            )}
           </div>
-          <div>Total: {totalPrice} dabloons</div>
+          <div style={{ color: "#040712" }}>Total: {totalPrice} dabloons</div>
           <div
             style={{
               display: "flex",

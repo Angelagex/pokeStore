@@ -50,7 +50,7 @@ import { getAllPokemonsThunk } from "../../redux/features/pokemon/pokemonActions
           dispatch(
             getLogged(true)
           )
-          dispatch(getAllPokemonsThunk(0))
+          dispatch(getAllPokemonsThunk())
             navigate("/main")
           // ...
         })

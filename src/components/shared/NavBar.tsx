@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navbar, NavDropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   logOut,
@@ -8,6 +7,7 @@ import {
 } from "../../redux/features/login/loginSlice";
 import { useAppDispatch } from "../../redux/store";
 import Cart from "./Cart";
+import { resetStore } from "../../redux/features/pokemon/pokemonSlice";
 
 type Props = {};
 
@@ -16,6 +16,10 @@ const NavBar: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
   const user = useSelector(selectActualUser());
+  const handleLogout = () => {
+    dispatch(resetStore())
+    dispatch(logOut());
+  }
 
   return (
     <Navbar variant="dark" expand="lg">
@@ -46,7 +50,7 @@ const NavBar: React.FC<Props> = (props) => {
             <NavDropdown.Divider />
             <NavDropdown.Item
               onClick={() => {
-                dispatch(logOut());
+                handleLogout()
               }}
             >
               Logout

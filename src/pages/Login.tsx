@@ -43,7 +43,7 @@ const LoginPage: React.FunctionComponent<ILoginProps> = (props) => {
           dispatch(
             getLogged(true)
           )
-          dispatch(getAllPokemonsThunk(0))
+          dispatch(getAllPokemonsThunk())
           navigate("/main")
 
           /*Whit the information of the user you can populate an state that is mainly focused on 

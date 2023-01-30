@@ -24,7 +24,7 @@ const Buy: React.FC<Props> = (props) => {
         Buy Now!
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} style={{color: "#040712"}}>
         {cartPokemons.length == 0 ? <Modal.Body>Please select some items first!</Modal.Body> : <Modal.Body>Thanks for your purchase!</Modal.Body>}
       </Modal>
     </>

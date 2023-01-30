@@ -6,6 +6,7 @@ import {
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { useAppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import { gePokemonClassname } from "../../helpers/getPokeClassname";
 
 interface IPokeCardProps {
   pokemon: IPokemon;
@@ -44,17 +45,10 @@ const PokeCard: React.FunctionComponent<IPokeCardProps> = ({ pokemon }) => {
       $card.offsetWidth, $card.offsetHeight, e.nativeEvent.offsetX, e.nativeEvent.offsetY
     );
 
-    // need to use a <style> tag for psuedo elements
-
-    var style = `
-    .card:hover::before { ${grad_pos} };  
-    .card:hover::after { ${sprk_pos} ${opc} };   
-    // `;
     // set / apply css class and style
     $card.classList.remove("active");
     $card.classList.remove("animated");
     $card.style.transform = tf;
-    console.log(styleRef.current?.childNodes);
     
     $card!.nextSibling!.textContent = `.card:hover:before { ${grad_pos} }
     .card:hover:after { ${sprk_pos} ${opc} }`;
@@ -91,23 +85,12 @@ const PokeCard: React.FunctionComponent<IPokeCardProps> = ({ pokemon }) => {
   return (
     <>
       <div
-        className="card eevee animated"
+        className={`card ${gePokemonClassname(pokemon.rarity)} animated`}
         onPointerMove={(e) => handleHover(e)}
         onMouseLeave={(e) => resetStyles(e)}
         onClick={(e) => handleCardDetail(e)}
-      >
-       {  <div className="content">
-          <div className="cardHeader">
-            <h2>{pokemon.name}</h2>{" "}
-            {pokemon.isFavorite ? (
-              <FaStar style={{ fontSize: "35px", color: "gold" }} />
-            ) : (
-              <FaRegStar style={{ fontSize: "35px" }} />
-            )}
-          </div>
-          <img className="cardImg" src={pokemon.sprite} alt="" />
-        </div> }
-      </div>
+        style={{backgroundImage:`url(${pokemon.image})`}}
+      ></div>
       <style ref={styleRef}></style>
     </>
   );
