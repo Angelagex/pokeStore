@@ -12,12 +12,12 @@ interface IMainPageProps {}
 const MainPage: React.FunctionComponent<IMainPageProps> = (props) => {
   const [page, setPage] = React.useState(1);
   const pokemons = useSelector(selectAllPokemons()).slice(
-    (page - 1) * 8,
-    page * 8
+    (page - 1) * 12,
+    page * 12
   );
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex"}}>
       <FaChevronLeft
         style={{
           color: "rgba(221, 202, 202, 0.87)",
@@ -35,7 +35,7 @@ const MainPage: React.FunctionComponent<IMainPageProps> = (props) => {
           page !== 1 ? setPage(page - 1) : "";
         }}
       />
-      <div className="cards">
+      <div className="cards" style={{display: "flex", flexWrap: "wrap"}}>
         {pokemons.map((item: IPokemon, index: number) => (
           <div key={index as React.Key}>
             <PokeCard pokemon={item} />
