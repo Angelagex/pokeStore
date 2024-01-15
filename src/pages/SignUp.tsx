@@ -21,9 +21,9 @@ const SingUpPage: React.FunctionComponent<ISingUpPageProps> = (props) => {
           //If the logged in is succesfull you will acces this part of teh code where you will
           //get a lot of information about the user that have logged in
           const user = userCredential.user;
-          console.log("****user****");
+/*           console.log("****user****");
 
-          console.log(user);
+          console.log(user); */
           /*Whit the information of the user you can populate an state that is mainly focused on 
             holding the information of the user that is logged in*/
 
@@ -34,8 +34,8 @@ const SingUpPage: React.FunctionComponent<ISingUpPageProps> = (props) => {
           //the user what went wrong
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("*** sign in error ***");
-          console.log(errorMessage);
+/*           console.log("*** sign in error ***");
+          console.log(errorMessage); */
           // ..
         });
 

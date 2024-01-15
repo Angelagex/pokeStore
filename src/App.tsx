@@ -8,7 +8,6 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 
 function App() {
 
-
   return (
     <BrowserRouter>
       <Provider store={store}>

@@ -8,6 +8,7 @@ import {
 import { useAppDispatch } from "../../redux/store";
 import Cart from "./Cart";
 import { resetStore } from "../../redux/features/pokemon/pokemonSlice";
+import { Image } from "antd";
 
 type Props = {};
 
@@ -31,14 +32,15 @@ const NavBar: React.FC<Props> = (props) => {
           <NavDropdown
             title={
               user?.userImage ? (
-                <img
+                <Image
+                  alt="user"
                   src={user?.userImage}
                   height="35"
                   className="d-inline-block align-top rounded-circle"
                 />
                 
               ) : (
-                <img
+                <Image
                   src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
                   height="35"
                   className="d-inline-block align-top rounded-circle"
