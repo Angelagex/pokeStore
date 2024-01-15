@@ -21,6 +21,8 @@ const NavBar: React.FC<Props> = (props) => {
     dispatch(resetStore())
     dispatch(logOut());
   }
+  console.log(user);
+  
 
   return (
     <Navbar variant="dark" expand="lg">
@@ -34,9 +36,10 @@ const NavBar: React.FC<Props> = (props) => {
               user?.userImage ? (
                 <Image
                   alt="user"
-                  src={user?.userImage}
-                  height="35"
+                  src={user.userImage || ""}
+                  height="35px"
                   className="d-inline-block align-top rounded-circle"
+                  referrerPolicy="no-referrer"
                 />
                 
               ) : (

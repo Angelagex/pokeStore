@@ -10,7 +10,7 @@ export const getAllPokemonsThunk = createAsyncThunk(
       await fetch(`${ENDPOINT}`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         headers: {
-          "X-Api-Key": "760fa40d-3873-4463-b6f2-edfed3165e0c"
+          "X-Api-Key": process.env.API_KEY as string
         }
       })
     ).json();
