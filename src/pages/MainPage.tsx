@@ -18,7 +18,7 @@ const MainPage: React.FunctionComponent<IMainPageProps> = (props) => {
 
   return (
     <>
-      <p style={{ color: "white", borderBottomLeftRadius: "50px", borderTopLeftRadius: "50px", position: "absolute", right: 0, width:"200px" }}> {page} / 13</p>
+      <p style={{ color: "white", borderBottomLeftRadius: "50px", borderTopLeftRadius: "50px", position: "absolute", right: 0, width:"200px" }}> {page} / 9</p>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ zIndex: "1" }}>
           <FaChevronLeft
@@ -56,7 +56,7 @@ const MainPage: React.FunctionComponent<IMainPageProps> = (props) => {
               (e.currentTarget.style.color = "rgba(221, 202, 202, 0.87)")
             }
             onClick={() => {
-              page !== 13 ? setPage(page + 1) : "";
+              page !== 9 ? setPage(page + 1) : "";
             }}
           />
         </div>
